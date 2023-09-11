@@ -64,8 +64,8 @@
         $mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
         //Recipients
-        $mail->setFrom('postmaster@sandboxee48add78ce748cfb9ab6f6f584df931.mailgun.org', 'Remetente');
-        $mail->addAddress('SendMailGitHubIM@proton.me', 'Destinatario');     //Add a recipient
+        $mail->setFrom('postmaster@sandboxee48add78ce748cfb9ab6f6f584df931.mailgun.org');
+        $mail->addAddress($mensagem->__get('para'));     //Add a recipient
         // $mail->addReplyTo('info@example.com', 'Information');
         // $mail->addCC('cc@example.com');
         // $mail->addBCC('bcc@example.com');
@@ -76,9 +76,9 @@
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Teste Assunto';
-        $mail->Body    = 'Teste body <b>HTML!</b>';
-        $mail->AltBody = 'Teste body plain';
+        $mail->Subject = $mensagem->__get('assunto');
+        $mail->Body    = $mensagem->__get('mensagem');
+        // $mail->AltBody = $mensagem->__get('mensagem');
 
         $mail->send();
         echo 'Message has been sent';
